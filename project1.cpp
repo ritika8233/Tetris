@@ -1,4 +1,5 @@
-#include<iostream>
+#define UNICODE
+#include<bits/stdc++.h>
 using namespace std;
 
 #include<Windows.h>
@@ -6,7 +7,7 @@ wstring tetromino[7];
 
 // setting the playing area
 int nFieldWidth=12;
-int nFieldHeight=18;
+int nFieldHeight=12;
 unsigned char *pField= NULL;
 
 //initialize the screen
@@ -76,5 +77,15 @@ int main(){
 	SetConsoleActiveScreenBuffer(hConsole);
 	DWORD dwBytesWritten = 0 ;
 	
+	bool bGameOver = false;
+	while(!bGameOver){
+	for(int x=0 ; x<nFieldWidth ; x++){
+		for(int y=0 ; y<nFieldHeight ; y++){
+    	screen[((y+2)*nScreenWidth )+(x+2)]= L" ABCDEFG=#"[pField[(y*nFieldWidth) + x]];
+		}
+	  }
+	WriteConsoleOutputCharacter(hConsole, screen,nScreenWidth*nScreenHeight ,{0,0},&dwBytesWritten);
+  
+   }
 	return 0;
 }
